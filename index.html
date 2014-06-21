@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MPG Prediction System</title>
+  <meta charset="utf-8">
+  <meta name="description" content="MPG Prediction System">
+  <meta name="author" content="Nasir Mahmood">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>MPG Prediction System</h1>
+    <h2>Motor Trend</h2>
+    <p>Nasir Mahmood<br/>Course Project - Developing Data Products</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Mile per gallon (MPG) depends on car feature</li>
+<li>Develop multivariable regression model for MPG prediction</li>
+<li>Web-based MPG prediction application</li>
+<li>Demonstrate the application</li>
+<li>Summary</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Problem</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>A car&#39;s MPG depends on number of features;</p>
+
+<ol>
+<li>Weight</li>
+<li>Horse Power</li>
+<li>Number of cylinders</li>
+</ol>
+
+<p>Existing data shows reasonable relationship between above features and MPG. Therefore you can model this relations and can use it to build an effective MPG prediction system.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Method</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Simple Multivariable Regresion Model with predictors:</p>
+
+<ul>
+<li>Weight</li>
+<li>Hourse Power</li>
+<li>Cylinder</li>
+</ul>
+
+<p>For concept validation, we used mtcars data;</p>
+
+<pre><code class="r">data(mtcars)
+fit &lt;- lm(mpg ~ wt + hp + cyl, data = mtcars)
+summary(fit)$coeff
+</code></pre>
+
+<pre><code>##             Estimate Std. Error t value  Pr(&gt;|t|)
+## (Intercept) 38.75179    1.78686  21.687 4.799e-19
+## wt          -3.16697    0.74058  -4.276 1.995e-04
+## hp          -0.01804    0.01188  -1.519 1.400e-01
+## cyl         -0.94162    0.55092  -1.709 9.848e-02
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Demo</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>On previous Correlation of predictors is significant except hp variable. We assume with large training data set, hp variable will also turn into a significant variable.</p>
+
+<p>For prediction, a user will have to pride wight, horse power and cylinder values of his car. Base on model (fit), our MPG system will predict MPG and also give confidence interval e.g.</p>
+
+<pre><code class="r">newdata &lt;- data.frame(wt = 4, hp = 100, cyl = 6)
+predict(fit, newdata, interval = &quot;predict&quot;)
+</code></pre>
+
+<pre><code>##     fit   lwr   upr
+## 1 18.63 13.15 24.11
+</code></pre>
+
+<p>Where 18.63 is predict MPG and [13.15, 24.11] its confidence interval.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Regression Model for MPG prediction is simple and easily interpretable</li>
+<li>A robust model</li>
+<li>Weight and number of cylinders have significant correlations with MPG</li>
+<li>R&#39;s lm function used to build regression model for prediction</li>
+<li>Demo shows prediction results</li>
+<li>Model still has room for improvement</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Problem'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Method'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Demo'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Summary'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title=''>
+         6
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
